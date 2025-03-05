@@ -1,18 +1,23 @@
-app = "fly-io-tj-db-testing"  # Make sure the app name matches
+# fly.toml app configuration file generated for fly-io-tj-db-testing on 2025-03-05T18:55:56Z
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'fly-io-tj-db-testing'
+primary_region = 'ams'
 
 [build]
-  # No need to specify builder if you're using a custom Dockerfile
 
-[[services]]
+[http_service]
   internal_port = 8080
-  protocol = "tcp"
-  [services.concurrency]
-    hard_limit = 25
-    soft_limit = 20
-    type = "connections"
-  [[services.ports]]
-    handlers = ["http"]
-    port = 80
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
 
-[env]
-  PYTHON_VERSION = "3.9"  # Explicitly set Python version (optional)
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
+  memory_mb = 256
