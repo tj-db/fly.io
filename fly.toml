@@ -1,7 +1,7 @@
-app = "fly-io-tj-db-testing"  # Name should match the app name you selected in the Fly.io interface
+app = "fly-io-tj-db-testing"  # Ensure the app name matches the one created on Fly.io
 
 [build]
-  builder = "heroku/buildpacks:python"  # Use a Python buildpack for Flask apps (no Dockerfile needed)
+  dockerfile = "Dockerfile"  # Point to the Dockerfile to build the app
 
 [[services]]
   internal_port = 8080  # Flask's default port
