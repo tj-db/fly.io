@@ -1,0 +1,18 @@
+app = "fly-io-tj-db-testing"  # Make sure the app name matches
+
+[build]
+  builder = "heroku/buildpacks:python"  # Use the Python buildpack for Flask apps
+
+[[services]]
+  internal_port = 8080
+  protocol = "tcp"
+  [services.concurrency]
+    hard_limit = 25
+    soft_limit = 20
+    type = "connections"
+  [[services.ports]]
+    handlers = ["http"]
+    port = 80
+
+[env]
+  PYTHON_VERSION = "3.9"  # Explicitly set Python version
